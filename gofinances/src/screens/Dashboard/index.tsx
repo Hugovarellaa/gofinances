@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
+import { Container,Title } from "./styles";
 
-import { Container, Title } from "./styles";
-
-export const Dashboard: React.FC = () => {
+export function Dashboard() {
   return (
-    <Container>
-      <Title>Testando</Title>
-    </Container>
-  );
-};
+    <>
+      <Container>
+        <Title>Dashboard</Title>
+      </Container>
+    </>
+  )
+}
+
