@@ -1,6 +1,7 @@
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
@@ -14,13 +15,14 @@ export const Header = styled.View`
   height: ${RFPercentage(36)}px;
 
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
 `;
 
 export const HeaderWrapper = styled.View`
   width: 100%;
   padding: 0 24px;
+  margin-top: ${getStatusBarHeight() + RFValue(28)}px;
 
   flex-direction: row;
   align-items: center;
@@ -58,4 +60,14 @@ export const UserName = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: ${RFValue(18)}px;
+`;
+
+export const HighLightCards = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: { paddingHorizontal: 24 },
+})`
+  width: 100%;
+  position: absolute;
+  margin-top: ${RFPercentage(17)}px;
 `;
