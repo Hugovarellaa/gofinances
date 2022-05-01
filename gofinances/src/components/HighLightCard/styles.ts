@@ -15,7 +15,7 @@ export const Container = styled.View<TypeProps>`
 
   border-radius: 5px;
   padding: 19px 23px;
-  padding-bottom: ${RFValue(42)}px;
+  padding-bottom: ${RFValue(34)}px;
 
   margin-right: 16px;
 `;
@@ -62,7 +62,7 @@ export const Amount = styled.Text<TypeProps>`
   font-size: ${RFValue(32)}px;
   color: ${({ theme, type }) =>
     type === "total" ? theme.colors.shape : theme.colors.text_dark};
-  margin-top: 38px;
+  margin-top: 18px;
 `;
 
 export const LastTransaction = styled.Text<TypeProps>`
@@ -70,4 +70,5 @@ export const LastTransaction = styled.Text<TypeProps>`
   color: ${({ theme, type }) =>
     type === "total" ? theme.colors.shape : theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.regular};
+  margin-top: -7px
 `;
