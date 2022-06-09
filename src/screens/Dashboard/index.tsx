@@ -1,7 +1,8 @@
 import React from "react";
-import { Cards } from "../../components/Cards";
+import { Card } from "../../components/Card";
 import {
   Avatar,
+  Cards,
   Container,
   Header,
   Icon,
@@ -29,7 +30,11 @@ export function Dashboard() {
         </UserContainer>
       </Header>
 
-      <Cards />
+      <Cards>
+        <Card />
+        <Card />
+        <Card />
+      </Cards>
     </Container>
   );
 }

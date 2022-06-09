@@ -9,7 +9,7 @@ import {
   Title
 } from "./styles";
 
-export function Cards() {
+export function Card() {
   return (
     <Container>
       <Header>
