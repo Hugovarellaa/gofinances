@@ -3,6 +3,7 @@ import {
   Avatar,
   Container,
   Header,
+  Icon,
   User,
   UserContainer,
   UserGreeting,
@@ -23,6 +24,7 @@ export function Dashboard() {
               <UserName>Hugo Varella</UserName>
             </User>
           </UserInfo>
+          <Icon name="power" />
         </UserContainer>
       </Header>
     </Container>
