@@ -1,4 +1,5 @@
 import React from "react";
+import { Cards } from "../../components/Cards";
 import {
   Avatar,
   Container,
@@ -27,6 +28,8 @@ export function Dashboard() {
           <Icon name="power" />
         </UserContainer>
       </Header>
+
+      <Cards />
     </Container>
   );
 }
