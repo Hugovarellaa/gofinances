@@ -1,13 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View } from 'react-native';
+import { ThemeProvider } from 'styled-components';
 import { Dashboard } from './src/screens/Dashboard';
+import theme from "./src/styles/theme/default";
 
 export default function App() {
   return (
-    <View>
-      <StatusBar style="auto" />
+    <ThemeProvider theme={theme}>
       <Dashboard />
-    </View>
+
+    </ThemeProvider>
   );
 }
