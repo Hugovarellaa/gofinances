@@ -9,7 +9,7 @@ type Category = {
   icon: string
 }
 
-interface Data {
+export interface TransactionCardProps {
   type: 'positive' | 'negative';
   title: string;
   amount: string;
@@ -17,11 +17,11 @@ interface Data {
   date: string
 }
 
-interface TransactionCardProps {
-  data: Data
+interface Props {
+  data: TransactionCardProps
 }
 
-export function TransactionCard({ data }: TransactionCardProps) {
+export function TransactionCard({ data }: Props) {
   return (
     <TransactionCardContainer>
       <Title>{data.title}</Title>
