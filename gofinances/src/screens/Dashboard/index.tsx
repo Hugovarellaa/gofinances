@@ -1,12 +1,47 @@
+import { FlatList } from "react-native";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 import { HighLightCard } from "../../components/HighLightCard";
+import { TransactionCard } from "../../components/TransactionCard";
 import {
   DashboardContainer,
   Header, HighLightCards, Icon, Photo,
+  Title, Transactions,
   User, UserContainer, UserGreeting, UserInfo, UserName
 } from "./styles";
 
 
 export function Dashboard() {
+  const data = [
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      category: {
+        name: "Vendas",
+        icon: 'dollar-sign'
+      },
+      date: "13/04/2020"
+    },
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      category: {
+        name: "Vendas",
+        icon: 'dollar-sign'
+      },
+      date: "13/04/2020"
+    },
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      category: {
+        name: "Vendas",
+        icon: 'dollar-sign'
+      },
+      date: "13/04/2020"
+    }
+
+  ]
+
   return (
     <DashboardContainer>
       <Header>
@@ -44,6 +79,21 @@ export function Dashboard() {
           lastTransaction="01 à 16 de abril"
         />
       </HighLightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ 
+            paddingBottom: getBottomSpace() 
+          }}
+          data={data}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+        >
+        </FlatList>
+
+      </Transactions>
 
     </DashboardContainer>
   )
