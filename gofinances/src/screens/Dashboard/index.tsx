@@ -1,8 +1,9 @@
 import {
   DashboardContainer,
-  Header, Photo,
+  Header, Icon, Photo,
   User, UserContainer, UserGreeting, UserInfo, UserName
 } from "./styles";
+
 
 export function Dashboard() {
   return (
@@ -18,6 +19,7 @@ export function Dashboard() {
               <UserName>Hugo</UserName>
             </User>
           </UserInfo>
+          <Icon name="power" />
         </UserContainer>
       </Header>
     </DashboardContainer>
