@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../../components/Form/Button";
+import { CategorySelect } from "../../components/Form/CategorySelect";
 import { Input } from "../../components/Form/Input";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { Fields, Form, Header, RegisterContainer, Title, TransactionTypes } from "./styles";
@@ -37,6 +38,7 @@ export function Register() {
             />
 
           </TransactionTypes>
+        <CategorySelect  title="Categoria"/>
         </Fields>
         <Button title="Enviar" />
       </Form>
