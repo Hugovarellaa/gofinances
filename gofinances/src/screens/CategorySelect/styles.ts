@@ -1,4 +1,5 @@
 import { Feather } from "@expo/vector-icons";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
@@ -8,7 +9,7 @@ export const CategorySelectContainer = styled.View`
   
 `
 
-export const Header = styled.View`
+export const Header = styled(GestureHandlerRootView)`
   width: 100%;
   height: ${RFValue(113)}px;
  background: ${({ theme }) => theme.colors.primary};
