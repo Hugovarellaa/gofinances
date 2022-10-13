@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const CategorySelectContainer = styled(TouchableOpacity).attrs({
+export const CategorySelectButtonContainer = styled(TouchableOpacity).attrs({
   activeOpacity: 0.7
 })`
   background: ${({ theme }) => theme.colors.shape};

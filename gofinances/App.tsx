@@ -6,7 +6,7 @@ import {
 import AppLoading from "expo-app-loading";
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Register } from './src/screens/Register';
+import { CategorySelect } from './src/screens/CategorySelect';
 import theme from "./src/styles/theme/default";
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Register />
+      <CategorySelect />
 
     </ThemeProvider>
   );

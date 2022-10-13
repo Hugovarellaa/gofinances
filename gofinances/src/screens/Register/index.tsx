@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../../components/Form/Button";
-import { CategorySelect } from "../../components/Form/CategorySelect";
+import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
 import { Input } from "../../components/Form/Input";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { Fields, Form, Header, RegisterContainer, Title, TransactionTypes } from "./styles";
@@ -27,7 +27,7 @@ export function Register() {
             <TransactionTypeButton
               title="Income"
               type="up"
-              isActive={transactionType  === 'up'}
+              isActive={transactionType === 'up'}
               onPress={() => handleTransactionTypeSelect('up')}
             />
             <TransactionTypeButton
@@ -38,7 +38,7 @@ export function Register() {
             />
 
           </TransactionTypes>
-        <CategorySelect  title="Categoria"/>
+          <CategorySelectButton title="Categoria" />
         </Fields>
         <Button title="Enviar" />
       </Form>
