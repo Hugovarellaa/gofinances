@@ -54,7 +54,7 @@ export function Register() {
             />
 
           </TransactionTypes>
-          <CategorySelectButton title="Categoria" onPress={handleOpenCategoryModal} />
+          <CategorySelectButton title={category.name} onPress={handleOpenCategoryModal} />
         </Fields>
         <Button title="Enviar" />
       </Form>
