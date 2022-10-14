@@ -1,15 +1,24 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Modal } from "react-native";
 import { Button } from "../../components/Form/Button";
 import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
-import { Input } from "../../components/Form/Input";
+import { InputForm } from "../../components/Form/InputForm";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { CategorySelect } from "../CategorySelect";
 import { Fields, Form, Header, RegisterContainer, Title, TransactionTypes } from "./styles";
 
+interface FormData {
+  name: string;
+  amount: string;
+}
+
+
 export function Register() {
   const [transactionType, setTransactionType] = useState('')
   const [isModalCategoryOpen, setIsModalCategoryOpen] = useState(false)
+
+  const { control, handleSubmit } = useForm()
 
   const [category, setCategory] = useState({
     key: 'category',
@@ -28,6 +37,16 @@ export function Register() {
     setIsModalCategoryOpen(false)
   }
 
+  function handleInputForm({ name, amount }: FormData) {
+    const data = {
+      name,
+      amount,
+      transactionType,
+      category: category.key
+    }
+    console.log(data)
+  }
+
   return (
     <RegisterContainer>
       <Header>
@@ -37,8 +56,9 @@ export function Register() {
 
       <Form>
         <Fields>
-          <Input placeholder="Nome" />
-          <Input placeholder="Preço" />
+          <InputForm name="name" control={control} placeholder="Nome" />
+          <InputForm name="amount" control={control} placeholder="Preço" />
+
           <TransactionTypes >
             <TransactionTypeButton
               title="Income"
@@ -56,7 +76,7 @@ export function Register() {
           </TransactionTypes>
           <CategorySelectButton title={category.name} onPress={handleOpenCategoryModal} />
         </Fields>
-        <Button title="Enviar" />
+        <Button title="Enviar" onPress={handleSubmit(handleInputForm)} />
       </Form>
 
       <Modal visible={isModalCategoryOpen}>
