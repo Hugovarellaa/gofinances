@@ -34,7 +34,6 @@ export function Register() {
   const [transactionType, setTransactionType] = useState('')
   const [isModalCategoryOpen, setIsModalCategoryOpen] = useState(false)
 
-  const collectionKey = '@gofinances:transactions'
 
   const navigation = useNavigation<NavigationProps>()
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
@@ -76,6 +75,8 @@ export function Register() {
     }
 
     try {
+      const collectionKey = '@gofinances:transactions'
+
       const data = await AsyncStorage.getItem(collectionKey)
       const currentData = data ? JSON.parse(data) : []
 
