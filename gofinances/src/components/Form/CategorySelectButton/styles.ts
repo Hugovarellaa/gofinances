@@ -1,9 +1,10 @@
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const CategorySelectButtonContainer = styled(TouchableOpacity).attrs({
+
+export const CategorySelectButtonContainer = styled(RectButton).attrs({
   activeOpacity: 0.7
 })`
   background: ${({ theme }) => theme.colors.shape};

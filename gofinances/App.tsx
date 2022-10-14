@@ -3,10 +3,13 @@ import {
   Poppins_500Medium,
   Poppins_700Bold, useFonts
 } from '@expo-google-fonts/poppins';
+import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 import React from 'react';
+import "react-native-gesture-handler";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components';
-import { Register } from './src/screens/Register';
+import { AppRoutes } from './src/routes/app.routes';
 import theme from "./src/styles/theme/default";
 
 export default function App() {
@@ -21,9 +24,13 @@ export default function App() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <ThemeProvider theme={theme}>
-      <Register  />
-
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </ThemeProvider>
+    </GestureHandlerRootView>
+
   );
 }

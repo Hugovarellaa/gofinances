@@ -1,5 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { FlatList, FlatListProps } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
@@ -69,6 +70,10 @@ export const Icon = styled(Feather)`
 
 `
 
+export const LogoutButton = styled(BorderlessButton)`
+  
+`
+
 export const HighLightCards = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
@@ -98,3 +103,4 @@ export const TransactionList = styled(
     paddingBottom: getBottomSpace()
   },
 })``
+

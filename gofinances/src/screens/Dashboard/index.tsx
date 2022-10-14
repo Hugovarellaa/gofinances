@@ -2,7 +2,7 @@ import { HighLightCard } from "../../components/HighLightCard";
 import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
 import {
   DashboardContainer,
-  Header, HighLightCards, Icon, Photo,
+  Header, HighLightCards, Icon, LogoutButton, Photo,
   Title, TransactionList, Transactions,
   User, UserContainer, UserGreeting, UserInfo, UserName
 } from "./styles";
@@ -13,7 +13,7 @@ export interface DataListProps extends TransactionCardProps {
 
 
 export function Dashboard() {
-  const data : DataListProps[] = [
+  const data: DataListProps[] = [
     {
       id: '1',
       type: 'positive',
@@ -63,7 +63,9 @@ export function Dashboard() {
               <UserName>Hugo</UserName>
             </User>
           </UserInfo>
-          <Icon name="power" />
+          <LogoutButton onPress={()=>{}}>
+            <Icon name="power" />
+          </LogoutButton>
         </UserContainer>
       </Header>
 
