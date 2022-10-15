@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import { VictoryPie } from 'victory-native';
-import { HistoryCard } from "../../components/HistoryCard";
+import { HistoryCard } from '../../components/HistoryCard';
 import { categories } from '../../utils/categories';
 import { ChartContainer, Header, ResumeContainer, ScrollViewContent, Title } from "./styles";
 
@@ -83,34 +84,45 @@ export function Resume() {
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <ScrollViewContent >
+      <ScrollViewContent
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingBottom: useBottomTabBarHeight()
+        }}
+      >
         <ChartContainer>
-          <VictoryPie
+          <VictoryPie 
             data={totalByCategories}
             colorScale={totalByCategories.map(category => category.color)}
             style={{
               labels: {
-                  fontSize: RFValue(18),
-                  fontWeight: 'bold',
-                  fill: theme.colors.shape
-                }
+                fontSize: RFValue(18),
+                fontWeight: 'bold',
+                fill: theme.colors.shape
+              }
             }}
             labelRadius={50}
             x='percent'
-            y="total"
+            y='total'
           />
         </ChartContainer>
 
         {
-          totalByCategories.map(item => (
-            <HistoryCard
-              title={item.name}
-              amount={item.totalFormatted}
-              color={item.color}
-              key={item.key} />
-          ))
+          totalByCategories.map(
+            item => (
+              <HistoryCard 
+                key={item.key}
+                title={item.name}
+                amount={item.totalFormatted}
+                color={item.color}
+              />
+            )
+          )
         }
       </ScrollViewContent>
+
+
 
     </ResumeContainer >
   )
