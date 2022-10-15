@@ -6,7 +6,14 @@ import { useTheme } from 'styled-components';
 import { VictoryPie } from 'victory-native';
 import { HistoryCard } from '../../components/HistoryCard';
 import { categories } from '../../utils/categories';
-import { ChartContainer, Header, ResumeContainer, ScrollViewContent, Title } from "./styles";
+import {
+  ChartContainer,
+  Header, Month, MonthSelect,
+  MonthSelectButton,
+  MonthSelectIcon, ResumeContainer,
+  ScrollViewContent,
+  Title
+} from "./styles";
 
 export interface TransactionData {
   type: 'positive' | 'negative';
@@ -91,6 +98,19 @@ export function Resume() {
           paddingBottom: useBottomTabBarHeight()
         }}
       >
+
+        <MonthSelect>
+          <MonthSelectButton>
+             <MonthSelectIcon name='chevron-left'/>  
+          </MonthSelectButton>          
+
+          <Month>Outubro</Month>
+
+          <MonthSelectButton>
+             <MonthSelectIcon name='chevron-right'/>  
+          </MonthSelectButton>  
+        </MonthSelect>
+
         <ChartContainer>
           <VictoryPie 
             data={totalByCategories}
