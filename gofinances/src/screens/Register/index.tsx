@@ -25,7 +25,7 @@ type NavigationProps = {
 
 const transactionFormDataSchemaValidator = yup.object().shape({
   name: yup.string().required('O Nome e Obrigatório'),
-  amount: yup.number().typeError('Informe um valor numérico').positive('O valor não pode ser negativo'),
+  amount: yup.number().typeError('Informe um valor numérico').positive('O valor não pode ser negativo').required('O valor é obrigatório'),
 })
 
 // type TransactionSchema = yup.InferType<typeof transactionFormDataSchemaValidator>

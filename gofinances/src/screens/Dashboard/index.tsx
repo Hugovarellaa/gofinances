@@ -131,8 +131,6 @@ export function Dashboard() {
 
   useEffect(() => {
     LoadTransaction()
-
-
   }, [])
 
   return (
