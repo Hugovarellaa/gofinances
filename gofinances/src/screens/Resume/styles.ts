@@ -20,3 +20,8 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(18)}px;
 `;
+
+export const ScrollViewContent = styled.ScrollView.attrs({
+  contentContainerStyle: { flex: 1, padding: 24 },
+})`
+`;
