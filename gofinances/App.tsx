@@ -12,6 +12,7 @@ import { StatusBar } from 'react-native';
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components';
+import { AuthProvider } from './src/hooks/useAuth';
 // import { AppRoutes } from './src/routes/app.routes';
 import { SignIn } from './src/screens/SignIn';
 import theme from "./src/styles/theme/default";
@@ -22,20 +23,22 @@ export default function App() {
     Poppins_500Medium,
     Poppins_700Bold
   })
-  
-  if(!fontsLoaded){
-    return  <AppLoading />
+
+  if (!fontsLoaded) {
+    return <AppLoading />
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar barStyle='light-content'/>
-        {/* <AppRoutes /> */}
-        <SignIn />
-      </NavigationContainer>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <StatusBar barStyle='light-content' />
+          {/* <AppRoutes /> */}
+          <AuthProvider>
+            <SignIn />
+          </AuthProvider>
+        </NavigationContainer>
+      </ThemeProvider>
     </GestureHandlerRootView>
 
   );
