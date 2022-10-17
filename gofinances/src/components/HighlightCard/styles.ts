@@ -10,8 +10,10 @@ export const HighlightCardContainer = styled.View<TypeProps>`
   background-color: ${({ type, theme }) =>
     type === "total" ? theme.colors.secondary : theme.colors.shape};
 
-  width: ${RFValue(300)}px;
-  padding: 19px 23px ${RFValue(42)}px;
+  width: ${RFValue(280)}px;
+  padding: 19px 23px;
+  padding-bottom: ${RFValue(30)}px;
+
   margin-right: 16px;
   border-radius: 5px;
 `;
@@ -55,7 +57,7 @@ export const Icon = styled(Feather)<TypeProps>`
 export const Amount = styled.Text<TypeProps>`
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(32)}px;
-  margin-top: 35px;
+  margin-top: 10px;
 
   color: ${({ type, theme }) =>
     type === "total" ? theme.colors.shape : theme.colors.text_dark};
