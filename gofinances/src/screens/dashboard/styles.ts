@@ -7,5 +7,5 @@ export const DashboardContainer = styled.View`
 `
 
 export const Title = styled.Text`
-
+  color: ${({theme}) => theme.colors.primary};
 `
