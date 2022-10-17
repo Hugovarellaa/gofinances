@@ -56,6 +56,8 @@ export const UserName = styled.Text`
   margin-top: -8px;
 `;
 
+
+
 export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${RFValue(24)}px;
