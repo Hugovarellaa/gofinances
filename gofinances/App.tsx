@@ -3,6 +3,7 @@ import {
   Poppins_500Medium,
   Poppins_700Bold, useFonts
 } from '@expo-google-fonts/poppins';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Loading } from './src/components/Loading';
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar style='light'/>
       {
         fontsLoaded ? <Dashboard />  : <Loading />  
       }
