@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Loading } from './src/components/Loading';
-import { CategorySelect } from './src/screens/CategorySelect';
+import { Register } from './src/screens/Register';
 import theme from './src/styles/theme';
 
 
@@ -26,7 +26,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar style='light'/>
       {
-        fontsLoaded ? <CategorySelect />  : <Loading />  
+        fontsLoaded ? <Register />  : <Loading />  
       }
     </ThemeProvider>
   );
