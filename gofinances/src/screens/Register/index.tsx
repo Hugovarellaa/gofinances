@@ -1,8 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
+import uuid from "react-native-uuid";
 import * as yup from "yup";
 import { ButtonForm } from "../../components/form/ButtonForm";
 import { CategorySelectButtonForm } from "../../components/form/CategorySelectButtonForm";
@@ -16,6 +18,10 @@ interface FormData {
   amount: string
 }
 
+type NavigationProps = {
+  navigate: (screen: string) => void;
+}
+
 const createFromValidateSchema = yup.object().shape({
   name: yup.string().required('Nome é Obrigatório'),
   amount: yup.number().typeError('Informe um valor numérico').positive('O valor nao pode ser negativo').required('O valor e Obrigatório')
@@ -27,10 +33,12 @@ export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false)
 
+  const navigation = useNavigation<NavigationProps>()
+
   const createForm = useForm({
     resolver: yupResolver(createFromValidateSchema)
   })
-  const { control, handleSubmit, formState } = createForm
+  const { control, handleSubmit, formState, reset } = createForm
   const { errors } = formState
 
   const [category, setCategory] = useState({
@@ -59,21 +67,32 @@ export function Register() {
       return Alert.alert('Selecione a categoria')
     }
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
 
     try {
       const collectionKey = '@gofinance:transaction'
-      
+
       const data = await AsyncStorage.getItem(collectionKey)
       const currentData = data ? JSON.parse(data) : []
       const dataFormatted = [
         ...currentData,
         newTransaction
       ]
+      setTransactionType('')
+      setCategory({
+        key: 'category',
+        name: 'Categoria'
+      })
+      reset()
+
+      
+      navigation.navigate('Listagem');
 
       await AsyncStorage.setItem(collectionKey, JSON.stringify(dataFormatted))
 
