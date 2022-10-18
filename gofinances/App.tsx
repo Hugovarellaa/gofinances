@@ -5,6 +5,8 @@ import {
 } from '@expo-google-fonts/poppins';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Loading } from './src/components/Loading';

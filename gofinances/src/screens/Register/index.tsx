@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from "react-native";
 import uuid from "react-native-uuid";
@@ -70,16 +70,17 @@ export function Register() {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
-      date: new Date()
-    }
-
+      date: new Date(),
+    };
     try {
       const collectionKey = '@gofinance:transaction'
 
       const data = await AsyncStorage.getItem(collectionKey)
+
       const currentData = data ? JSON.parse(data) : []
+
       const dataFormatted = [
         ...currentData,
         newTransaction
@@ -91,7 +92,7 @@ export function Register() {
       })
       reset()
 
-      
+
       navigation.navigate('Listagem');
 
       await AsyncStorage.setItem(collectionKey, JSON.stringify(dataFormatted))
@@ -101,17 +102,7 @@ export function Register() {
       Alert.alert('Nao foi possível salvar')
     }
   }
-
-  async function loadData() {
-    const collectionKey = '@gofinance:transaction'
-
-    const response = await AsyncStorage.getItem(collectionKey)
-    console.log(JSON.parse(response))
-  }
-
-  useEffect(() => {
-    loadData()
-  }, [])
+  
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
