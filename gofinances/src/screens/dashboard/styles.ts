@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import { FlatList, FlatListProps } from "react-native";
+import { FlatList, FlatListProps, TouchableOpacity } from "react-native";
 import {
   getBottomSpace,
   getStatusBarHeight
@@ -61,6 +61,8 @@ export const UserName = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
   margin-top: -8px;
 `;
+
+export const LogoutButton = styled(TouchableOpacity)``
 
 export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.secondary};

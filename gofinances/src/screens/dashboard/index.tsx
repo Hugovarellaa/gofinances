@@ -4,10 +4,11 @@ import { useCallback, useState } from "react";
 import { HighlightCard } from "../../components/HighlightCard";
 import { Loading } from "../../components/Loading";
 import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
+import { useAuth } from "../../hooks/auth";
 import {
   AvatarUser,
   DashboardContainer,
-  Header, HighlightCards, Icon, Title, TransactionList, Transactions, User, UserGreeting, UserInfo, UserName, UserWrapper
+  Header, HighlightCards, Icon, LogoutButton, Title, TransactionList, Transactions, User, UserGreeting, UserInfo, UserName, UserWrapper
 } from "./styles";
 
 export interface DataListProps extends TransactionCardProps {
@@ -26,6 +27,8 @@ interface HighLightData {
 }
 
 export function Dashboard() {
+  const { SignOut, user } = useAuth()
+
   const [isLoading, setIsLoading] = useState(true)
   const [transaction, setTransaction] = useState<DataListProps[]>([])
   const [highlightData, setHighlightData] = useState({} as HighLightData)
@@ -129,15 +132,17 @@ export function Dashboard() {
         <UserWrapper>
           <User>
             <AvatarUser source={{
-              uri: 'https://github.com/Hugovarellaa.png'
+              uri: user.photo
             }}
             />
             < UserInfo >
               <UserGreeting>Olá,</UserGreeting>
-              <UserName>Hugo Varella</UserName>
+              <UserName>{user.name}</UserName>
             </UserInfo >
           </User >
-          <Icon name='power' />
+          <LogoutButton onPress={SignOut}>
+            <Icon name='power' />
+          </LogoutButton>
         </UserWrapper >
       </Header >
 
