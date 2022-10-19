@@ -23,15 +23,18 @@ interface AuthContextData {
   signInWithGoogle: () => Promise<void>
 }
 
+
+
 const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User)
 
+
   async function signInWithGoogle() {
     try {
-      const CLIENT_ID = '478427097488-28t1gh1hju63m4clt17qbv84u6spo8ap.apps.googleusercontent.com';
-      const REDIRECT_URI = "https://auth.expo.io/@hugovarella/gofinances"
+      const { CLIENT_ID } = process.env
+      const { REDIRECT_URI } = process.env
       const RESPONSE_TYPE = 'token'
       const SCOPE = encodeURI('profile email') // encodeURI retira o espaço para ser reconhecido pela url
 
@@ -49,6 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           email: userInfo.email,
           photo: userInfo.picture
         })
+        console.log({ user })
       }
 
     } catch (error) {
