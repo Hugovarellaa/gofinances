@@ -46,7 +46,7 @@ export function Register() {
     name: 'Categoria',
   })
 
-  function handleTransactionTypeSelect(type: 'income' | 'outcome') {
+  function handleTransactionTypeSelect(type: 'positive' | 'negative') {
     setTransactionType(type)
   }
 
@@ -132,14 +132,14 @@ export function Register() {
               <TransactionTypeButtonForm
                 title="Income"
                 type="income"
-                isActive={transactionType === 'income'}
-                onPress={() => handleTransactionTypeSelect('income')}
+                isActive={transactionType === 'positive'}
+                onPress={() => handleTransactionTypeSelect('positive')}
               />
               <TransactionTypeButtonForm
                 title="Outcome"
                 type="outcome"
-                isActive={transactionType === 'outcome'}
-                onPress={() => handleTransactionTypeSelect('outcome')}
+                isActive={transactionType === 'negative'}
+                onPress={() => handleTransactionTypeSelect('negative')}
               />
             </TransactionTypes>
             <CategorySelectButtonForm title={category.name} onPress={handleOpenSelectCategoryModal} />
