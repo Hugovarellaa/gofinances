@@ -9,6 +9,7 @@ import { useTheme } from "styled-components";
 import { VictoryPie } from "victory-native";
 import { HistoryCard } from "../../components/HistoryCard";
 import { Loading } from "../../components/Loading";
+import { useAuth } from "../../hooks/auth";
 import { categories } from "../../utils/categories";
 import {
   ChartContainer,
@@ -40,7 +41,10 @@ interface CategoryData {
 export function Resume() {
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth()
+
+  const collectionKey = `@gofinance:transaction_user:${user.name}`
 
   const theme = useTheme()
 
@@ -61,7 +65,6 @@ export function Resume() {
   async function loadData() {
     setIsLoading(true)
 
-    const collectionKey = '@gofinance:transaction'
     const response = await AsyncStorage.getItem(collectionKey)
     const formattedResponse = response ? JSON.parse(response) : []
 

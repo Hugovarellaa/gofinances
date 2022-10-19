@@ -10,6 +10,7 @@ import { ButtonForm } from "../../components/form/ButtonForm";
 import { CategorySelectButtonForm } from "../../components/form/CategorySelectButtonForm";
 import { InputForm } from "../../components/form/InputForm";
 import { TransactionTypeButtonForm } from "../../components/form/TransactionTypeButtonForm";
+import { useAuth } from "../../hooks/auth";
 import { CategorySelect } from "../CategorySelect";
 import { Fields, Form, Header, RegisterContainer, Title, TransactionTypes } from "./style";
 
@@ -30,8 +31,12 @@ const createFromValidateSchema = yup.object().shape({
 type Form = yup.InferType<typeof createFromValidateSchema>
 
 export function Register() {
+  const { user } = useAuth()
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false)
+
+  const collectionKey = `@gofinance:transaction_user:${user.name}`
+
 
   const navigation = useNavigation<NavigationProps>()
 
@@ -75,7 +80,6 @@ export function Register() {
       date: new Date(),
     };
     try {
-      const collectionKey = '@gofinance:transaction'
 
       const data = await AsyncStorage.getItem(collectionKey)
 
@@ -102,7 +106,7 @@ export function Register() {
       Alert.alert('Nao foi possível salvar')
     }
   }
-  
+
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
