@@ -7,6 +7,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { VictoryPie } from "victory-native";
 import { HistoryCard } from "../../components/HistoryCard";
+import { Loading } from "../../components/Loading";
 import { categories } from "../../utils/categories";
 import {
   ChartContainer,
@@ -38,12 +39,13 @@ interface CategoryData {
 export function Resume() {
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [isLoading, setIsLoading] = useState(true)
+
   const theme = useTheme()
 
   const dateFormatted = format(selectedDate, 'MMMM', {
     locale: ptBR,
   })
-  console.log(dateFormatted)
 
   function handleChangeDate(action: 'next' | 'prev') {
     if (action === 'next') {
@@ -103,6 +105,7 @@ export function Resume() {
       }
     })
     setTotalByCategories(totalByCategory)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -115,61 +118,63 @@ export function Resume() {
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <ScrollViewContent
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 24,
-          paddingBottom: useBottomTabBarHeight()
-        }}
-      >
-
-        <MonthSelect>
-          <MonthSelectButton onPress={() => handleChangeDate('prev')}>
-            <MonthSelectIcon name='chevron-left' />
-          </MonthSelectButton>
-
-          <Mont>{dateFormatted}</Mont>
-
-          <MonthSelectButton onPress={() => handleChangeDate('next')}>
-            <MonthSelectIcon name='chevron-right' />
-          </MonthSelectButton>
-        </MonthSelect>
-
-
-        <ChartContainer>
-          <VictoryPie
-            data={totalByCategories}
-            colorScale={totalByCategories.map(category => category.color)}
-            style={{
-              labels: {
-                fontSize: RFValue(18),
-                fontWeight: 'bold',
-                fill: theme.colors.shape
-              }
+      {
+        isLoading ? (
+          <Loading />
+        ) : (
+          <ScrollViewContent
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingHorizontal: 24,
+              paddingBottom: useBottomTabBarHeight()
             }}
-            labelRadius={50}
-            x='percent'
-            y='total'
-          />
-        </ChartContainer>
+          >
 
-        {
-          totalByCategories.map(
-            item => (
-              <HistoryCard
-                key={item.key}
-                title={item.name}
-                amount={item.totalFormatted}
-                color={item.color}
+            <MonthSelect>
+              <MonthSelectButton onPress={() => handleChangeDate('prev')}>
+                <MonthSelectIcon name='chevron-left' />
+              </MonthSelectButton>
+
+              <Mont>{dateFormatted}</Mont>
+
+              <MonthSelectButton onPress={() => handleChangeDate('next')}>
+                <MonthSelectIcon name='chevron-right' />
+              </MonthSelectButton>
+            </MonthSelect>
+
+
+            <ChartContainer>
+              <VictoryPie
+                data={totalByCategories}
+                colorScale={totalByCategories.map(category => category.color)}
+                style={{
+                  labels: {
+                    fontSize: RFValue(18),
+                    fontWeight: 'bold',
+                    fill: theme.colors.shape
+                  }
+                }}
+                labelRadius={50}
+                x='percent'
+                y='total'
               />
-            )
-          )
-        }
-      </ScrollViewContent>
+            </ChartContainer>
 
-
-
-
+            {
+              totalByCategories.map(
+                item => (
+                  <HistoryCard
+                    key={item.key}
+                    title={item.name}
+                    amount={item.totalFormatted}
+                    color={item.color}
+                  />
+                )
+              )
+            }
+          </ScrollViewContent>
+        )
+      }
     </ResumeContainer>
   )
 }
