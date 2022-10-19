@@ -10,6 +10,7 @@ import 'intl/locale-data/jsonp/pt-BR';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Loading } from './src/components/Loading';
+import { AuthProvider } from './src/hooks/auth';
 import { AppRoutes } from './src/routes/app.routes';
 import theme from './src/styles/theme';
 
@@ -29,9 +30,11 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar style='light' />
-        {
-          fontsLoaded ? <AppRoutes /> : <Loading />
-        }
+        <AuthProvider>
+          {
+            fontsLoaded ? <AppRoutes /> : <Loading />
+          }
+        </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
