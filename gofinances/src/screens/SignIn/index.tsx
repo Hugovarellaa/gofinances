@@ -1,7 +1,7 @@
 import { Footer, FooterWrapper, Header, SignInContainer, SignInTitle, Title, TitleWrapper } from "./styles";
 
 import { useState } from "react";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import AppleSVG from "../../assets/apple.svg";
 import GoogleSVG from "../../assets/google.svg";
@@ -64,7 +64,12 @@ export function SignIn() {
             <Footer>
               <FooterWrapper>
                 <SignInSocialButton title='Entrar com o Google' svg={GoogleSVG} onPress={handleSignInWithGoogle} />
-                <SignInSocialButton title='Entrar com o Apple' svg={AppleSVG} onPress={handleSignInWithApple} />
+
+                {
+                  Platform.OS === 'ios' && (
+                    <SignInSocialButton title='Entrar com o Apple' svg={AppleSVG} onPress={handleSignInWithApple} />
+                  )
+                }
               </FooterWrapper>
             </Footer>
           </>
