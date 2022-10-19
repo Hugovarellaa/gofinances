@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useFocusEffect } from "@react-navigation/native";
 import { addMonths, format, subMonths } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR/index.js";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { VictoryPie } from "victory-native";
@@ -39,7 +40,7 @@ interface CategoryData {
 export function Resume() {
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const theme = useTheme()
 
@@ -58,6 +59,8 @@ export function Resume() {
   }
 
   async function loadData() {
+    setIsLoading(true)
+
     const collectionKey = '@gofinance:transaction'
     const response = await AsyncStorage.getItem(collectionKey)
     const formattedResponse = response ? JSON.parse(response) : []
@@ -108,9 +111,10 @@ export function Resume() {
     setIsLoading(false)
   }
 
-  useEffect(() => {
+
+  useFocusEffect(useCallback(() => {
     loadData()
-  }, [selectedDate])
+  }, [selectedDate]))
 
   return (
     <ResumeContainer>
