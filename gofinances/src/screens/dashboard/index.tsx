@@ -36,16 +36,21 @@ export function Dashboard() {
   let entriesTotal = 0
   let expensiveTotal = 0
 
+
   function GetLastTransactionDate(collection: DataListProps[], type: 'positive' | 'negative') {
+    const collectionFlittered = collection.filter(transaction => transaction.type === type)
+
+    if (collectionFlittered.length === 0) {
+      return 0
+    }
+
     return new Date(
       Math.max.apply(Math,
-        collection
-          .filter((transaction) =>
-            transaction.type === type).map((transaction) =>
-              new Date(transaction.date).getTime()))).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: 'long',
-              })
+        collectionFlittered.map((transaction) =>
+          new Date(transaction.date).getTime()))).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: 'long',
+          })
   }
 
 
@@ -89,7 +94,7 @@ export function Dashboard() {
 
     const lasTransactionEntries = GetLastTransactionDate(transaction, 'positive')
     const lastTransactionExpensive = GetLastTransactionDate(transaction, 'negative')
-    const totalInterval = `01 à ${lastTransactionExpensive}`
+    const totalInterval = lastTransactionExpensive === 0 ?'Nao há transações' : `01 à ${lastTransactionExpensive}`
 
     setTransaction(transactionFormatted)
 
@@ -99,21 +104,21 @@ export function Dashboard() {
           style: 'currency',
           currency: "BRL"
         }),
-        lastTransaction: `Ultima entrada dia ${lasTransactionEntries}`
+        lastTransaction: lasTransactionEntries === 0 ? 'Nao há transações' : `Ultima entrada dia ${lasTransactionEntries}`
       },
       expensive: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: "BRL"
         }),
-        lastTransaction: `Ultima saída dia ${lastTransactionExpensive}`
+        lastTransaction: lastTransactionExpensive === 0 ? 'Nao há transações' : `Ultima saída dia ${lastTransactionExpensive}`
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
           style: 'currency',
           currency: "BRL"
         }),
-        lastTransaction: totalInterval
+        lastTransaction:  totalInterval
       }
     })
 
@@ -122,6 +127,8 @@ export function Dashboard() {
 
   useFocusEffect(useCallback(() => {
     loadTransaction()
+
+
   }, []))
 
   return isLoading ? (
