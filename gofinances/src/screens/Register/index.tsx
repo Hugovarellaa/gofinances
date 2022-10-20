@@ -71,6 +71,7 @@ export function Register() {
     if (category.key === 'category') {
       return Alert.alert('Selecione a categoria')
     }
+
     const newTransaction = {
       id: String(uuid.v4()),
       name: form.name,
@@ -80,26 +81,30 @@ export function Register() {
       date: new Date(),
     };
     try {
+      const collectionKey = `@gofinance:transaction_user:${user.name}`
+
 
       const data = await AsyncStorage.getItem(collectionKey)
 
       const currentData = data ? JSON.parse(data) : []
-
       const dataFormatted = [
         ...currentData,
         newTransaction
       ]
+
+      await AsyncStorage.setItem(collectionKey, JSON.stringify(dataFormatted))
+
+
+      reset()
       setTransactionType('')
       setCategory({
         key: 'category',
         name: 'Categoria'
       })
-      reset()
 
 
       navigation.navigate('Listagem');
 
-      await AsyncStorage.setItem(collectionKey, JSON.stringify(dataFormatted))
 
     } catch (error) {
       console.log(error)

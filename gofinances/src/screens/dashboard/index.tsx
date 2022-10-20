@@ -33,8 +33,7 @@ export function Dashboard() {
   const [transaction, setTransaction] = useState<DataListProps[]>([])
   const [highlightData, setHighlightData] = useState({} as HighLightData)
 
-  let entriesTotal = 0
-  let expensiveTotal = 0
+
 
 
   function GetLastTransactionDate(collection: DataListProps[], type: 'positive' | 'negative') {
@@ -59,6 +58,8 @@ export function Dashboard() {
     const response = await AsyncStorage.getItem(collectionKey)
     const transaction = response ? JSON.parse(response) : [];
 
+    let entriesTotal = 0
+    let expensiveTotal = 0
 
     const transactionFormatted: DataListProps[] = transaction.map((item: DataListProps) => {
       if (item.type === 'positive') {
@@ -88,15 +89,15 @@ export function Dashboard() {
         date
       }
     })
+    setTransaction(transactionFormatted)
 
-    const total = entriesTotal - expensiveTotal
 
 
     const lasTransactionEntries = GetLastTransactionDate(transaction, 'positive')
     const lastTransactionExpensive = GetLastTransactionDate(transaction, 'negative')
-    const totalInterval = lastTransactionExpensive === 0 ?'Nao há transações' : `01 à ${lastTransactionExpensive}`
+    const totalInterval = lastTransactionExpensive === 0 ? 'Nao há transações' : `01 à ${lastTransactionExpensive}`
 
-    setTransaction(transactionFormatted)
+    const total = entriesTotal - expensiveTotal
 
     setHighlightData({
       entries: {
@@ -118,15 +119,22 @@ export function Dashboard() {
           style: 'currency',
           currency: "BRL"
         }),
-        lastTransaction:  totalInterval
+        lastTransaction: totalInterval
       }
     })
 
     setIsLoading(false)
+
+  }
+
+  async function removeStorage() {
+    const collectionKey = `@gofinance:transaction_user:${user.name}`
+    await AsyncStorage.removeItem(collectionKey)
   }
 
   useFocusEffect(useCallback(() => {
     loadTransaction()
+    // removeStorage()
 
 
   }, []))
