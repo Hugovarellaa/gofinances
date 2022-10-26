@@ -13,10 +13,10 @@
 <br>
 
 <p align="center">
-  <img alt="Ecoleta" src="./gofinances/src/assets/Início-1.png" width="200px">
-  <img alt="Ecoleta" src="./gofinances/src/assets/Início.png" width="200px">
-  <img alt="Ecoleta" src="./gofinances/src/assets/Cadastro.png" width="200px">
-  <img alt="Ecoleta" src="./gofinances/src/assets/Resumo.png" width="200px"> 
+  <img  src="./gofinances/src/assets/Início-1.png" width="200px">
+  <img  src="./gofinances/src/assets/Início.png" width="200px">
+  <img  src="./gofinances/src/assets/Cadastro.png" width="200px">
+  <img  src="./gofinances/src/assets/Resumo.png" width="200px"> 
 </p>
 
 ## 🚀 Tecnologias
